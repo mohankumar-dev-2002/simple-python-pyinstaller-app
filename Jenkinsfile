@@ -13,11 +13,12 @@ pipeline{
         sh ''' python3 -m venv venv && source venv/bin/activate && pip install pytest && pytest sources/test_calc.py --json-report --junitxml=test-reports/results.xml'''
       }
     }
-    post{
+  }
+  post{
       always{
         junit 'test-reports/results.xml'
         archiveArtifacts artifacts: 'test-reports/results.xml', allowEmptyArchive: true
       }
-    }
   }
+
 }
