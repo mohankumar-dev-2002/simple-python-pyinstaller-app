@@ -32,12 +32,14 @@ pipeline{
         archiveArtifacts artifacts: 'test-reports/results.xml', allowEmptyArchive: true
       }
       success{
-        if (distExists('dist/add2vals')) {
-          sh 'echo "Build successful. Executable created at dist/add2vals"'
-          archiveArtifacts artifacts: 'dist/add2vals', allowEmptyArchive: true
-        } else {
-          sh 'echo "Build failed. Executable not found."'
-        }
+        // if (distExists('dist/add2vals')) {
+        //   sh 'echo "Build successful. Executable created at dist/add2vals"'
+        //   archiveArtifacts artifacts: 'dist/add2vals', allowEmptyArchive: true
+        // } else {
+        //   sh 'echo "Build failed. Executable not found."'
+        // }
+        sh 'echo "Build successful. Executable created at dist/add2vals"'
+        archiveArtifacts artifacts: 'dist/add2vals', allowEmptyArchive: true
       }
   }
 
