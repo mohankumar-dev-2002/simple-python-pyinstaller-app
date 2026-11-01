@@ -22,6 +22,7 @@ pipeline{
         echo 'Delivering...'
         sh '''#!/bin/bash
         set -euo pipefail
+        pip install pyinstaller && python3 -m venv venv && source venv/bin/activate 
         pyinstaller --onefile sources/add2vals.py --distpath dist'''
       }
     }
