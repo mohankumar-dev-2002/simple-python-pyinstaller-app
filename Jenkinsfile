@@ -22,8 +22,13 @@ pipeline{
         echo 'Delivering...'
         sh '''#!/bin/bash
         set -euo pipefail
-        pip install pyinstaller && python3 -m venv venv && source venv/bin/activate 
-        pyinstaller --onefile sources/add2vals.py --distpath dist'''
+        venv/bin/pip install pyinstaller  
+        venv/bin/pyinstaller --onefile sources/add2vals.py --distpath dist'''
+      }
+    }
+    post{
+      success{
+        archiveArtifacts artifacts: 'dist/add2vals'
       }
     }
   }
@@ -31,16 +36,6 @@ pipeline{
       always{
         junit 'test-reports/results.xml'
         archiveArtifacts artifacts: 'test-reports/results.xml', allowEmptyArchive: true
-      }
-      success{
-        // if (distExists('dist/add2vals')) {
-        //   sh 'echo "Build successful. Executable created at dist/add2vals"'
-        //   archiveArtifacts artifacts: 'dist/add2vals', allowEmptyArchive: true
-        // } else {
-        //   sh 'echo "Build failed. Executable not found."'
-        // }
-        sh 'echo "Build successful. Executable created at dist/add2vals"'
-        archiveArtifacts artifacts: 'dist/add2vals', allowEmptyArchive: true
       }
   }
 
