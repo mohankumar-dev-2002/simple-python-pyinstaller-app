@@ -25,11 +25,11 @@ pipeline{
         venv/bin/pip install pyinstaller  
         venv/bin/pyinstaller --onefile sources/add2vals.py --distpath dist'''
       }
-    }
-    post{
+      post{
       success{
         archiveArtifacts artifacts: 'dist/add2vals'
       }
+    }
     }
   }
   post{
